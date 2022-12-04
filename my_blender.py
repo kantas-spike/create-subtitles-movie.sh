@@ -73,7 +73,7 @@ def add_vortex(strength):
     bpy.context.object.field.seed = 1
     bpy.context.object.field.noise = 3
     bpy.context.object.field.noise = 0
-    bpy.context.object.field.use_absorption = False
+    bpy.context.object.field.use_absorption = True
     # bpy.context.object.rotation_euler = [math.radians(x) for x in [0, 65, 15]]
     bpy.context.object.rotation_euler = [math.radians(x) for x in [40, 80, 35]]
     # bpy.context.object.location = (-5, -1.5, -4)
@@ -181,7 +181,7 @@ def show_obj(obj, sec):
     insert_keyframes(obj, target_frame)
 
     # 初期段階での衝突回避用
-    target_frame += bpy.context.scene.render.fps * 2
+    target_frame += bpy.context.scene.render.fps * 0.6
     #  壁と同じ衝突グループに追加
     obj.rigid_body.collision_collections[0] = True
     # キーフレームの登録
