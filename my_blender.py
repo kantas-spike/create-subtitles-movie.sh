@@ -78,6 +78,7 @@ def add_vortex(strength):
     bpy.context.object.rotation_euler = [math.radians(x) for x in [40, 80, 35]]
     # bpy.context.object.location = (-5, -1.5, -4)
     bpy.context.object.location = (-5, 1, -1.5)
+    return bpy.context.object
 
 
 def create_material(name, base_color):
@@ -201,6 +202,20 @@ def hide_obj(obj, sec):
 
     # キーフレームの登録
     insert_keyframes(obj, target_frame)
+
+
+def animate_force(force, sec, strength):
+    if force.field.strength == strength:
+        return
+
+    target_frame = int(sec * bpy.context.scene.render.fps)
+    for k in ["field.strength"]:
+        force.keyframe_insert(data_path=k, frame=target_frame)
+
+    target_frame += 1
+    force.field.strength = strength
+    for k in ["field.strength"]:
+        force.keyframe_insert(data_path=k, frame=target_frame)
 
 
 def insert_keyframes(obj, frame):
