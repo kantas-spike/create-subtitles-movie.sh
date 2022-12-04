@@ -223,3 +223,19 @@ def insert_keyframes(obj, frame):
         obj.keyframe_insert(data_path=k, frame=frame)
 
     obj.keyframe_insert(data_path="rigid_body.collision_collections", frame=frame, index=0)
+
+
+def setup_greenback_worlds(color=(0, 1, 0, 1)):
+    tree = bpy.data.worlds['World'].node_tree
+    tree.links.clear()
+    output = tree.nodes["World Output"]
+    bg0 = tree.nodes["Background"]
+    bg1 = tree.nodes.new("ShaderNodeBackground")
+    bg1.inputs[0].default_value = color
+
+    mix = tree.nodes.new("ShaderNodeMixShader")
+    lp = tree.nodes.new("ShaderNodeLightPath")
+    tree.links.new(mix.outputs[0], output.inputs[0])
+    tree.links.new(bg0.outputs[0], mix.inputs[1])
+    tree.links.new(bg1.outputs[0], mix.inputs[2])
+    tree.links.new(lp.outputs[0], mix.inputs[0])
