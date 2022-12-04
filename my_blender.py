@@ -20,7 +20,7 @@ def initailize_blender():
         bpy.data.objects.remove(cube)
 
 
-def setup_output(fps, movie_sec):
+def setup_output(fps, movie_sec, percentage):
     # 出力の設定
     #  フレームレートに30
     preset_path = bpy.utils.preset_find(
@@ -30,6 +30,9 @@ def setup_output(fps, movie_sec):
     #   上記は以下を実行する
     #   bpy.context.scene.render.fps = 30
     #   bpy.context.scene.render.fps_base = 1
+
+    # 解像度の%
+    bpy.context.scene.render.resolution_percentage = percentage
 
     #  フレームレンジに30秒 (30×30=900)
     bpy.context.scene.frame_end = bpy.context.scene.render.fps * movie_sec
