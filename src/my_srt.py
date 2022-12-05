@@ -19,16 +19,16 @@ def read_srt_file(path):
                     item_list.append(item)
                     item = {}
             elif len(item) == 0:
-                item['no'] = int(line)
+                item["no"] = int(line)
             elif len(item) == 1:
                 if "-->" not in line:
                     raise ValueError(f"Bad time format:{item}")
-                item['time_info'] = parse_line_of_time(line)
+                item["time_info"] = parse_line_of_time(line)
             elif len(item) == 2:
-                item['lines'] = []
-                item['lines'].append(line)
+                item["lines"] = []
+                item["lines"].append(line)
             elif len(item) == 3:
-                item['lines'].append(line)
+                item["lines"].append(line)
 
         if len(item) > 0:
             item_list.append(item)
@@ -49,9 +49,6 @@ def parse_line_of_time(line):
             extras = m.group(3)
             if "JSON:" in extras:
                 json_data = json.loads(extras.split("JSON:")[1].strip())
-                # if "color" in json_data.keys():
-                #     if type(json_data["color"]) is str:
-                #         json_data["color"] = hex_to_rgba(json_data["color"])
                 results["json"] = json_data
         return results
     else:
@@ -70,7 +67,7 @@ def hex_to_rgba(hex_str: str):
     pattern = r"#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})?"
     max_value = 0xFF
     # 4桁形式 or 3桁形式
-    if (hex_len in [3, 4]):
+    if hex_len in [3, 4]:
         pattern = r"#([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])([0-9a-fA-F])?"
         max_value = 0xF
 
