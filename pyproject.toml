@@ -17,6 +17,14 @@ pytest-cov = "^4.0.0"
 [tool.poetry.group.dev.dependencies]
 black = "^22.10.0"
 flake8 = "^6.0.0"
+taskipy = "^1.10.3"
+
+[tool.taskipy.tasks]
+format = "black src/*.py"
+lint = "flake8 --extend-ignore=E203 --max-line-length=119 src"
+
+[tool.black]
+line-length = 119
 
 [build-system]
 requires = ["poetry-core"]
