@@ -4,8 +4,9 @@
 
 ## 使い方
 
-Blenderコマンドの`-P`オプションとともに `create-subtitles-movie.py` を呼びだします。
-`create-subtitles-movie.py`に引き渡す引数は、`--`以降に記載します。
+`create-subtitles-movie.sh`の引数にSubRip形式を指定して呼び出します。
+
+Blenderが起動し、字幕ファイルをもとに作成された字幕アニメーションのプロジェクトを表示します。
 
 ### 使用例
 
